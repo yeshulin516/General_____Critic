@@ -24,19 +24,6 @@ var port = process.env.PORT || 8080;
 app.listen(port);
 console.log('Server started! At http://localhost:' + port);
 
-
-function addReview(title, review){
-  MongoClient.connect(url, function(err, db) {
-  if (err) throw err;
-  var reviewSturct = { title: title, review: review };
-  db.collection("customers").insertOne(reviewStruct, function(err, res) {
-    if (err) throw err;
-    console.log("1 document inserted");
-    db.close();
-  });
-});
-}
-
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/index.html'));
 });
@@ -58,12 +45,39 @@ app.get('/Images/Writing.jpg', function(req, res) {
 });
 
 app.get('/write-req', function(req, res) {
-  console.log(URL.parse(req.url, true).query);
+  MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  //console.log(URL.parse(req.url, true).query.Title);
+  db.collection("Reviews").insertOne(URL.parse(req.url, true).query, function(err, res) {
+    if (err) throw err;
+    console.log("1 review inserted");
+    db.close();
+  });
   res.redirect('/');
+});
 });
 
 app.get('/read-req', function(req, res) {
-  console.log(URL.parse(req.url, true).query);
+  //console.log(URL.parse(req.url, true).query);
+  MongoClient.connect(url, function(err, db) {
+  var search = URL.parse(req.url, true).query.Search;
+  search = search.substring(0, search.length - 2);
+  //console.log(search);
+  var reviews = db.collection('Reviews').find();
+  reviews.each(function(err, item) {
+        if (item != null){
+          var title = item.Title;
+          title = title.substring(0, title.length - 4);
+          console.log(title);
+          console.log(search);
+          
+          if (title.valueOf() === search.valueOf()){
+            console.log(item);
+          }
+        }
+      });
+  db.close();
+  });
   res.redirect('/');
 });
 
