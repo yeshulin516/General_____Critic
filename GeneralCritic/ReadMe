@@ -1,0 +1,9 @@
+ReadMe
+
+show dbs
+use <db name>
+show collections
+
+
+display collection contents:
+db.collectionName.find()

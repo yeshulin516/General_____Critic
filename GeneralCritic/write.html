@@ -9,7 +9,7 @@
 body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 </style>
 <body class="w3-blue">
-  <form action="">
+  <form action="/write-req">
     <input type="checkbox" name="Catagories" value="Places" >Places&nbsp &nbsp  
     <input type="checkbox" name="Catagories" value="Games"> Games &nbsp &nbsp
     <input type="checkbox" name="Catagories" value="Movies"> Movies &nbsp &nbsp
@@ -19,18 +19,16 @@ body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     <input type="checkbox" name="Catagories" value="Fashion"> Fashion &nbsp &nbsp
     <input type="checkbox" name="Catagories" value="Sports"> Sports &nbsp &nbsp
     <input type="checkbox" name="Catagories" value="Miscellaneous"> Miscellaneous &nbsp &nbsp<br>
+    <head><div class="w3-blue"><h3>Title:</h3></div></head>
+    <textarea rows="1" cols="60" name="Title"></textarea><br>
+    <head><div class="w3-blue"><h3>Review:</h3></div></head>
+    <textarea rows="15" cols="100" name="Review"></textarea><br>
+    <input type="submit" value="Submit">
   </form>
 
-  <form action="/write-req">
-
-   <textarea rows="1" cols="60" name="Title">
-    Enter the Title of your Topic. 
-  </textarea><br>
-  <textarea rows="15" cols="100" name="Review">
-    Enter Your Review Here.
-  </textarea><br>
-  <input type="submit" value="Submit">
-</form>
+  <form action="/">
+    <p><button type="Home button">Home</button></p>
+  </form>
 
 
 </body>
