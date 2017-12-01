@@ -1,15 +1,17 @@
 var mongo = require('mongodb');
 var MongoClient = mongo.MongoClient;
 var path = require('path');
-var url = "mongodb://localhost:27017/mydb";
+var url = "mongodb://user:user12345@18.217.136.69/mydb"//localhost:27017/mydb";
 var URL = require('url')
 var _ = require('underscore')
 
 MongoClient.connect(url, function(err, db) {
   if (err) throw err;
+
   // db.createCollection("Reviews", function(err, res) {
   //   if (err) throw err;
-  //   console.log("Collection created!");
+  console.log(err);
+    //console.log("Collection created!");
   //   db.close();
   // });
 });
@@ -27,7 +29,7 @@ app.set('view engine', 'html');
 
 // start the server
 app.listen(port);
-console.log('Server started! At http://localhost:' + port);
+//console.log('Server started! At http://localhost:' + port);
 
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/index.html'));
@@ -59,7 +61,7 @@ app.get('/write-req', function(req, res) {
   //console.log(URL.parse(req.url, true).query.Title);
   db.collection("Reviews").insertOne(URL.parse(req.url, true).query, function(err, res) {
     if (err) throw err;
-    console.log("1 review inserted");
+    //console.log("1 review inserted");
     db.close();
   });
   res.redirect('/submit');
@@ -75,8 +77,8 @@ app.get('/full-text', function(req, res) {
       if (item != null)
       {
         var revTitle = item.Title
-        console.log(title)
-        console.log(revTitle)
+        //console.log(title)
+        //console.log(revTitle)
         if (title.valueOf() === revTitle.valueOf()){
           match = item
         }
@@ -133,7 +135,7 @@ app.get('/read-req', function(req, res) {
           if (categories != undefined)
           {
             reviewType = typeof(item.Catagories)
-            console.log(reviewType)
+            //console.log(reviewType)
             if (item.Catagories != undefined)
             {
               if (searchType.valueOf() === "string".valueOf())
